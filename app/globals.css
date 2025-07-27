@@ -33,6 +33,10 @@
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
+    
+    /* Theme transition duration */
+    --theme-transition-duration: 400ms;
+    --theme-transition-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .dark {
@@ -174,6 +178,37 @@ body {
     }
 }
 
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-out-right {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes slide-in-up {
     from {
         opacity: 0;
@@ -229,6 +264,18 @@ body {
 .animate-scale-x {
     animation: scale-x 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
     transform-origin: center bottom;
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-slide-out-right {
+    animation: slide-out-right 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.animate-fade-out {
+    animation: fade-out 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* Animation delays */
@@ -308,13 +355,39 @@ body {
     background: var(--secondary);
 }
 
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+    transition: 
+        background-color var(--theme-transition-duration) var(--theme-transition-timing),
+        border-color var(--theme-transition-duration) var(--theme-transition-timing),
+        color var(--theme-transition-duration) var(--theme-transition-timing),
+        box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+html {
+    transition: 
+        background-color var(--theme-transition-duration) var(--theme-transition-timing),
+        color-scheme var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+body {
+    transition: 
+        background-color var(--theme-transition-duration) var(--theme-transition-timing),
+        color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
 /* Form elements */
 button,
 a,
 input,
 textarea,
 select {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color var(--theme-transition-duration) var(--theme-transition-timing),
+                border-color var(--theme-transition-duration) var(--theme-transition-timing),
+                color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
 /* Custom range slider */
@@ -404,6 +477,12 @@ input[type="checkbox"]:focus {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+    
+    /* Keep theme transitions smooth even with reduced motion */
+    html,
+    body {
+        transition-duration: var(--theme-transition-duration) !important;
     }
 
     .text-gradient-primary,
