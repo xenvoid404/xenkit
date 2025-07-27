@@ -1,35 +1,31 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import { ToolsPageClient } from '@/app/tools/page-client';
+import { type Metadata } from 'next';
+import { ToolsPageClient } from './page-client';
 
 export const metadata: Metadata = {
-    title: 'Developer Tools Collection - Free Online Utilities for Coders | Xenkit',
-    description:
-        'Discover a powerful collection of free developer tools including encoders, decoders, generators, formatters, and more. Built for speed, simplicity, and productivity.',
+    title: 'All Developer Tools - Complete Collection of Web Utilities',
+    description: 'Browse our complete collection of developer tools including password generators, formatters, encoders, decoders, and more. Free online utilities for developers.',
     keywords: [
-        'developer tools',
-        'free coding tools',
+        'developer tools collection',
+        'all developer tools',
+        'web tools directory',
         'online developer utilities',
+        'coding tools',
+        'programming utilities',
+        'free developer tools',
         'web development tools',
-        'code formatter',
-        'json encoder decoder',
-        'programming tools online',
-        'javascript utilities',
         'developer toolkit',
-        'xenkit developer tools'
+        'online tools'
     ],
     openGraph: {
-        title: 'Developer Tools Collection - Free Online Utilities for Coders | Xenkit',
-        description:
-            'A complete toolkit of developer utilities including encoders, decoders, formatters, and generators. Fast, easy, and free to use.',
+        title: 'All Developer Tools - Complete Collection | Xenkit',
+        description: 'Browse our complete collection of developer tools. Free online utilities for developers.',
         type: 'website',
         url: 'https://xenkit.com/tools'
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Developer Tools Collection - Free Online Utilities for Coders',
-        description:
-            'Explore a complete set of online developer tools including encoders, decoders, formatters, and generators. Simple, fast, and free.'
+        title: 'All Developer Tools - Complete Collection | Xenkit',
+        description: 'Browse our complete collection of developer tools. Free online utilities for developers.'
     },
     alternates: {
         canonical: 'https://xenkit.com/tools'
@@ -41,25 +37,54 @@ export const metadata: Metadata = {
 };
 
 export default function ToolsPage() {
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Developer Tools Collection',
+        description: 'Complete collection of free online developer tools and utilities',
+        url: 'https://xenkit.com/tools',
+        mainEntity: {
+            '@type': 'ItemList',
+            name: 'Developer Tools',
+            description: 'Collection of essential developer tools and utilities',
+            numberOfItems: 25,
+            itemListElement: [
+                {
+                    '@type': 'SoftwareApplication',
+                    name: 'Password Generator',
+                    description: 'Generate secure, random passwords with customizable options',
+                    url: 'https://xenkit.com/tools/password-generator',
+                    applicationCategory: 'SecurityApplication',
+                    operatingSystem: 'Web Browser'
+                }
+            ]
+        },
+        breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://xenkit.com'
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Tools',
+                    item: 'https://xenkit.com/tools'
+                }
+            ]
+        }
+    };
+
     return (
-        <Suspense
-            fallback={
-                <div className="min-h-screen bg-background py-8 px-4">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="animate-pulse">
-                            <div className="h-8 bg-muted/20 rounded-lg w-64 mb-4"></div>
-                            <div className="h-4 bg-muted/20 rounded-lg w-96 mb-8"></div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                {Array.from({ length: 8 }).map((_, i) => (
-                                    <div key={i} className="h-40 bg-muted/20 rounded-lg"></div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        >
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <ToolsPageClient />
-        </Suspense>
+        </>
     );
 }

@@ -117,6 +117,50 @@ export default function RootLayout({
 }: Readonly<{
     children: ReactNode;
 }>) {
+    // JSON-LD structured data for the website
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Xenkit',
+        description: 'Modern toolkit for developers with essential utilities for development, security and productivity.',
+        url: 'https://xenkit.com',
+        potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+                '@type': 'EntryPoint',
+                urlTemplate: 'https://xenkit.com/tools?search={search_term_string}'
+            },
+            'query-input': 'required name=search_term_string'
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Xenkit',
+            url: 'https://xenkit.com',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://xenkit.com/logo.png'
+            },
+            sameAs: [
+                'https://github.com/xenvoid404'
+            ]
+        },
+        mainEntity: {
+            '@type': 'ItemList',
+            name: 'Developer Tools',
+            description: 'Collection of essential developer tools and utilities',
+            numberOfItems: 25,
+            itemListElement: [
+                {
+                    '@type': 'SoftwareApplication',
+                    name: 'Password Generator',
+                    description: 'Generate secure, random passwords with customizable options',
+                    url: 'https://xenkit.com/tools/password-generator',
+                    applicationCategory: 'SecurityApplication'
+                }
+            ]
+        }
+    };
+
     return (
         <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <head>
@@ -130,6 +174,12 @@ export default function RootLayout({
                 <link rel="apple-touch-icon" href="/favicon-180.png" />
                 <link rel="shortcut icon" href="/favicon.ico" />
                 <meta name="google-site-verification" content="your-google-verification-code-here" />
+                
+                {/* JSON-LD structured data */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
             </head>
             <body className={`${figtree.variable} font-figtree antialiased bg-background text-foreground`}>
                 {/* Google Analytics */}

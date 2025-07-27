@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { type FormEvent, useState } from 'react';
-import { FiMail } from 'react-icons/fi';
+import { FiCoffee } from 'react-icons/fi';
 import { navigations, socials } from '@/data/navigations';
 
 export function AppFooter() {
@@ -96,6 +96,28 @@ export function AppFooter() {
                                 );
                             })}
                         </div>
+                    </div>
+                </div>
+
+                {/* Buy Me a Coffee Section */}
+                <div className="border-t border-muted/20 pt-6 pb-6">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="text-center md:text-left">
+                            <h4 className="font-semibold text-foreground mb-2">Support This Project</h4>
+                            <p className="text-sm text-muted-foreground">
+                                If Xenkit has been helpful to you, consider buying us a coffee to support development! ☕
+                            </p>
+                        </div>
+                        <a
+                            href="https://buymeacoffee.com/xenvoid404"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden whitespace-nowrap"
+                        >
+                            <FiCoffee className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
+                            <span className="relative z-10">Buy Me a Coffee</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-yellow-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </a>
                     </div>
                 </div>
 

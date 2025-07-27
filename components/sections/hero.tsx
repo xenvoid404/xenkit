@@ -1,40 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { FaArrowRight, FaRegClock } from 'react-icons/fa';
 import { GoZap } from 'react-icons/go';
 import { IoShieldCheckmarkOutline } from 'react-icons/io5';
 
 export function Hero() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0 }
-    };
-
-    const badgeVariants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1 }
-    };
-
     return (
         <section
-            ref={ref}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-muted/5"
             aria-labelledby="hero-heading"
         >
@@ -46,19 +19,15 @@ export function Hero() {
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8">
-                <motion.div variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="text-center space-y-8">
+                <div className="text-center space-y-8">
                     {/* Badge */}
-                    <motion.div
-                        variants={badgeVariants}
-                        transition={{ duration: 0.5, ease: 'easeOut' }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium"
-                    >
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium animate-fade-in-up">
                         <GoZap className="w-4 h-4" />
                         <span>25 Developer Tools Available</span>
-                    </motion.div>
+                    </div>
 
                     {/* Main Heading */}
-                    <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: 'easeOut' }} className="space-y-6">
+                    <div className="space-y-6 animate-fade-in-up animation-delay-150">
                         <h1 id="hero-heading" className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-tight">
                             <span className="block">
                                 <span className="text-gradient-glow">Powerful Tools</span>
@@ -70,14 +39,10 @@ export function Hero() {
                             Your ultimate toolkit with all the essential utilities for development, security and productivity in one place.
                             <span className="text-foreground font-medium"> Free, fast, and secure.</span>
                         </p>
-                    </motion.div>
+                    </div>
 
                     {/* Feature highlights */}
-                    <motion.div
-                        variants={itemVariants}
-                        transition={{ duration: 0.6, ease: 'easeOut' }}
-                        className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground"
-                    >
+                    <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground animate-fade-in-up animation-delay-300">
                         <div className="flex items-center gap-2">
                             <IoShieldCheckmarkOutline className="w-4 h-4 text-green-500" />
                             <span>No signup required</span>
@@ -90,27 +55,19 @@ export function Hero() {
                             <GoZap className="w-4 h-4 text-yellow-500" />
                             <span>Always free</span>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* CTA Buttons */}
-                    <motion.div
-                        variants={itemVariants}
-                        transition={{ duration: 0.6, ease: 'easeOut' }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                    >
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-500">
                         <Link href="#featured-tools">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-                            >
+                            <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 overflow-hidden">
                                 <span className="relative z-10">Explore Tools</span>
                                 <FaArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            </motion.button>
+                            </button>
                         </Link>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                </div>
             </div>
         </section>
     );

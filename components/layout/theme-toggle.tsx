@@ -1,5 +1,4 @@
 import { IoSunnyOutline, IoMoonOutline } from 'react-icons/io5';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/contexts/theme-provider';
 
 export function ThemeToggle() {
@@ -12,20 +11,15 @@ export function ThemeToggle() {
         <button
             onClick={toggleTheme}
             aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} theme`}
-            className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background hover:bg-background/70 transition-colors"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full bg-background hover:bg-background/70 hover:scale-110 active:scale-95 transition-all duration-300 group"
         >
-            <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                    key={resolvedTheme}
-                    initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
-                    animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                    exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute"
-                >
-                    {resolvedTheme === 'dark' ? <IoSunnyOutline className="h-5 w-5" /> : <IoMoonOutline className="h-5 w-5" />}
-                </motion.div>
-            </AnimatePresence>
+            <div className="relative">
+                {resolvedTheme === 'dark' ? (
+                    <IoSunnyOutline className="h-5 w-5 transition-all duration-300 group-hover:rotate-90 animate-fade-in-up" />
+                ) : (
+                    <IoMoonOutline className="h-5 w-5 transition-all duration-300 group-hover:-rotate-12 animate-fade-in-up" />
+                )}
+            </div>
         </button>
     );
 }

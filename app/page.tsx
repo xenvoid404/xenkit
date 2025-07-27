@@ -37,9 +37,44 @@ export const metadata: Metadata = {
     }
 };
 
-export default function Home() {
+export default function HomePage() {
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'Xenkit - Developer Tools for the Web',
+        description: 'Modern toolkit for developers with essential utilities for development, security and productivity.',
+        url: 'https://xenkit.com',
+        mainEntity: {
+            '@type': 'Organization',
+            name: 'Xenkit',
+            url: 'https://xenkit.com',
+            description: 'Platform providing free online developer tools and utilities',
+            foundingDate: '2024',
+            contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'Developer Support',
+                url: 'https://github.com/xenvoid404'
+            }
+        },
+        breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: 'https://xenkit.com'
+                }
+            ]
+        }
+    };
+
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             {/* Skip Navigation Link for Accessibility */}
             <a
                 href="#main-content"
