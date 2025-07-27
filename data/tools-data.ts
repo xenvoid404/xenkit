@@ -1,5 +1,5 @@
 import { type IconType } from 'react-icons';
-import { FiLock } from 'react-icons/fi';
+import { FiLock, FiCode, FiKey, FiHash, FiTag, FiShield } from 'react-icons/fi';
 
 export interface Tool {
     id: string;
@@ -20,6 +20,51 @@ export const tools: Tool[] = [
         icon: FiLock,
         url: '/tools/password-generator',
         keywords: ['password', 'secure', 'random', 'generator', 'security', 'strong password', 'auth']
+    },
+    {
+        id: 'base64-encoder-decoder',
+        name: 'Base64 Encoder & Decoder',
+        description: 'Encode and decode text to/from Base64 format with real-time conversion',
+        categories: ['Converters', 'Encoding', 'Utilities'],
+        icon: FiCode,
+        url: '/tools/base64-encoder-decoder',
+        keywords: ['base64', 'encode', 'decode', 'encoding', 'conversion', 'text', 'binary']
+    },
+    {
+        id: 'jwt-builder-decoder',
+        name: 'JWT Builder & Decoder',
+        description: 'Create, decode, and verify JSON Web Tokens (JWT) with various algorithms',
+        categories: ['Development', 'Security', 'API'],
+        icon: FiKey,
+        url: '/tools/jwt-builder-decoder',
+        keywords: ['jwt', 'json web token', 'auth', 'authentication', 'decode', 'verify', 'bearer']
+    },
+    {
+        id: 'hash-generator',
+        name: 'Hash Generator',
+        description: 'Generate MD5, SHA-1, SHA-256, SHA-512 and other hash values from text',
+        categories: ['Security', 'Encryption', 'Utilities'],
+        icon: FiHash,
+        url: '/tools/hash-generator',
+        keywords: ['hash', 'md5', 'sha1', 'sha256', 'sha512', 'checksum', 'digest', 'crypto']
+    },
+    {
+        id: 'uuid-generator',
+        name: 'UUID Generator',
+        description: 'Generate various types of UUIDs (v1, v4, v5) and custom identifiers',
+        categories: ['Generators', 'Utilities', 'Development'],
+        icon: FiTag,
+        url: '/tools/uuid-generator',
+        keywords: ['uuid', 'guid', 'unique', 'identifier', 'random', 'v1', 'v4', 'v5', 'nanoid']
+    },
+    {
+        id: 'rsa-key-generator',
+        name: 'RSA Key Generator',
+        description: 'Generate RSA public/private key pairs with customizable key sizes',
+        categories: ['Security', 'Encryption', 'Development'],
+        icon: FiShield,
+        url: '/tools/rsa-key-generator',
+        keywords: ['rsa', 'public key', 'private key', 'encryption', 'cryptography', 'pem', 'key pair']
     }
 ];
 
@@ -43,6 +88,7 @@ export const categoryColors: { [key: string]: string } = {
     'Formatters': 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/15',
     'Converters': 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/15',
     'Transform': 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/15',
+    'Encoding': 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/15',
     
     // Development
     'Development': 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20 hover:bg-orange-500/15',

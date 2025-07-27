@@ -5,15 +5,7 @@ import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { ToolCard } from '@/components/ui/tool-card';
 import { getRandomTools, type Tool } from '@/data/tools-data';
 import { FiCopy, FiRefreshCw, FiLock, FiCheck, FiEye, FiEyeOff, FiShield, FiZap, FiSettings } from 'react-icons/fi';
-// Custom password generator function
-function generateRandomPassword(options: { length: number; characters: string }): string {
-    const { length, characters } = options;
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-}
+import * as generator from 'generate-password';
 
 interface PasswordOptions {
     length: number;
@@ -56,33 +48,36 @@ export function PasswordGeneratorClient() {
 
     const generateNewPassword = useCallback(() => {
         try {
-            let charset = '';
-
-            if (options.includeLowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
-            if (options.includeUppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            if (options.includeNumbers) charset += '0123456789';
-            if (options.includeSymbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
-
+            // Build exclude string based on options
+            let excludeChars = '';
             if (options.excludeSimilar) {
-                charset = charset.replace(/[il1Lo0O]/g, '');
+                excludeChars += 'il1Lo0O';
             }
-
             if (options.excludeAmbiguous) {
-                charset = charset.replace(/[{}[\]()\/\\'"~,;.<>]/g, '');
+                excludeChars += '{}[]()\/\\\'\"~,;.<>';
             }
 
-            if (!charset) {
+            // Check if at least one character type is selected
+            if (!options.includeUppercase && !options.includeLowercase && 
+                !options.includeNumbers && !options.includeSymbols) {
                 setPassword('Please select at least one character type');
                 return;
             }
 
-            const newPassword = generateRandomPassword({
+            const newPassword = generator.generate({
                 length: options.length,
-                characters: charset
+                numbers: options.includeNumbers,
+                symbols: options.includeSymbols,
+                lowercase: options.includeLowercase,
+                uppercase: options.includeUppercase,
+                excludeSimilarCharacters: options.excludeSimilar,
+                exclude: excludeChars,
+                strict: true // Ensure all selected character types are included
             });
 
             setPassword(newPassword);
-        } catch {
+        } catch (error) {
+            console.error('Error generating password:', error);
             setPassword('Error generating password');
         }
     }, [options]);

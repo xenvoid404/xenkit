@@ -1,19 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { type FormEvent, useState } from 'react';
 import { FiCoffee } from 'react-icons/fi';
 import { navigations, socials } from '@/data/navigations';
 
 export function AppFooter() {
     const currentYear = new Date().getFullYear();
-    const [email, setEmail] = useState('');
-
-    const handleEmailSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        console.log('Email subscribed:', email);
-        setEmail('');
-    };
 
     return (
         <footer className="relative bg-gradient-to-br from-muted/10 via-background to-muted/10 border-t border-border/50">

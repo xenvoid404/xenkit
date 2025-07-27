@@ -193,8 +193,8 @@ export function ToolsPageClient() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 animate-fade-in-up animation-delay-300">
                         <div className="text-sm text-muted-foreground font-medium">
                             Showing <span className="text-foreground font-semibold">{filteredTools.length}</span> of <span className="text-foreground font-semibold">{tools.length}</span> tools
-                            {searchTerm && <span className="text-primary"> for "{searchTerm}"</span>}
-                            {selectedCategory !== 'all' && <span className="text-primary"> in "{selectedCategory}" category</span>}
+                            {searchTerm && <span className="text-primary"> for &quot;{searchTerm}&quot;</span>}
+                            {selectedCategory !== 'all' && <span className="text-primary"> in &quot;{selectedCategory}&quot; category</span>}
                         </div>
 
                         {(searchTerm || selectedCategory !== 'all') && (
@@ -231,7 +231,7 @@ export function ToolsPageClient() {
                             </div>
                             <h3 className="text-xl font-semibold mb-2">No tools found</h3>
                             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                                We couldn't find any tools matching your search criteria. Try adjusting your filters or search terms.
+                                We couldn&apos;t find any tools matching your search criteria. Try adjusting your filters or search terms.
                             </p>
                             <button
                                 onClick={clearFilters}
