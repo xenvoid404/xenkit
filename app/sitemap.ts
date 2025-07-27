@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { tools } from '@/data/tools-data';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://xenkit.com';
+    const baseUrl = SITE_CONFIG.url;
     const routes = [
         {
             url: baseUrl,

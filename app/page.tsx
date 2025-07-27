@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { Hero } from '@/components/sections/hero';
 import { FeaturedTools } from '@/components/sections/featured-tools';
+import { JsonLd, createWebSiteSchema } from '@/components/ui/json-ld';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
     title: 'Xenkit - Free Developer Tools & Utilities for Modern Development',
@@ -38,8 +40,16 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+    const websiteSchema = createWebSiteSchema(
+        SITE_CONFIG.url,
+        SITE_CONFIG.title,
+        SITE_CONFIG.description
+    );
+
     return (
         <>
+            <JsonLd data={websiteSchema} />
+            
             {/* Skip Navigation Link for Accessibility */}
             <a
                 href="#main-content"

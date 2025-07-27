@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { type FormEvent, useState } from 'react';
-import { FiMail } from 'react-icons/fi';
 import { navigations, socials } from '@/data/navigations';
+import { DonationButton } from '@/components/ui/donation-button';
 
 export function AppFooter() {
     const currentYear = new Date().getFullYear();
@@ -99,8 +99,20 @@ export function AppFooter() {
                     </div>
                 </div>
 
+                {/* Support Section */}
+                <div className="border-t border-muted/20 pt-6 pb-4">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="text-center">
+                            <p className="text-sm text-muted-foreground mb-3">
+                                Love using Xenkit? Support the project and help us keep it free!
+                            </p>
+                            <DonationButton />
+                        </div>
+                    </div>
+                </div>
+
                 {/* Bottom Section - Copyright */}
-                <div className="border-t border-muted/20 pt-6">
+                <div className="border-t border-muted/20 pt-4">
                     <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                         <div className="text-sm text-muted-foreground">
                             © {currentYear} Xenkit. All rights reserved. Made with ❤️ by{' '}

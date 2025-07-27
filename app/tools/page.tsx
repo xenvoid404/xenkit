@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { ToolsPageClient } from '@/app/tools/page-client';
+import { JsonLd, createWebPageSchema } from '@/components/ui/json-ld';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
     title: 'Developer Tools Collection - Free Online Utilities for Coders | Xenkit',
@@ -41,8 +43,16 @@ export const metadata: Metadata = {
 };
 
 export default function ToolsPage() {
+    const pageSchema = createWebPageSchema(
+        `${SITE_CONFIG.url}/tools`,
+        'Developer Tools Collection - Free Online Utilities for Coders',
+        'Discover a powerful collection of free developer tools including encoders, decoders, generators, formatters, and more. Built for speed, simplicity, and productivity.'
+    );
+
     return (
-        <Suspense
+        <>
+            <JsonLd data={pageSchema} />
+            <Suspense
             fallback={
                 <div className="min-h-screen bg-background py-8 px-4">
                     <div className="max-w-7xl mx-auto">
@@ -58,8 +68,9 @@ export default function ToolsPage() {
                     </div>
                 </div>
             }
-        >
-            <ToolsPageClient />
-        </Suspense>
+                    >
+                <ToolsPageClient />
+            </Suspense>
+        </>
     );
 }

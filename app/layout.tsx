@@ -4,6 +4,7 @@ import { Figtree } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeProvider } from '@/contexts/theme-provider';
 import AppLayout from '@/layouts/app-layout';
+import { SITE_CONFIG, DEFAULT_METADATA, THEME_COLORS } from '@/lib/constants';
 import './globals.css';
 
 const figtree = Figtree({
@@ -20,94 +21,61 @@ export const viewport: Viewport = {
     maximumScale: 5,
     userScalable: true,
     themeColor: [
-        { media: '(prefers-color-scheme: light)', color: '#8b5cf6' },
-        { media: '(prefers-color-scheme: dark)', color: '#a855f7' }
+        { media: '(prefers-color-scheme: light)', color: THEME_COLORS.light },
+        { media: '(prefers-color-scheme: dark)', color: THEME_COLORS.dark }
     ]
 };
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://xenkit.com'),
+    metadataBase: new URL(SITE_CONFIG.url),
     title: {
-        default: 'Xenkit - Developer Tools for the Web',
-        template: '%s | Xenkit'
+        default: SITE_CONFIG.title,
+        template: `%s | ${SITE_CONFIG.name}`
     },
-    description:
-        'Xenkit is a modern toolkit for developers offering a wide range of utilities such as encoders, decoders, generators, and formatters — all in one place to enhance your productivity.',
-    keywords: [
-        'developer tools',
-        'online dev tools',
-        'code formatter',
-        'base64 decoder',
-        'uuid generator',
-        'text utilities',
-        'developer productivity',
-        'online tools for developers',
-        'web tools',
-        'Xenkit',
-        'password generator',
-        'json formatter',
-        'url encoder',
-        'regex tester',
-        'color picker',
-        'hash generator',
-        'free online tools',
-        'developer utilities',
-        'coding tools'
-    ],
-    authors: [{ name: 'Xenvoid', url: 'https://github.com/xenvoid404' }],
-    creator: 'Xenvoid',
-    publisher: 'Xenkit',
+    description: SITE_CONFIG.description,
+    keywords: [...DEFAULT_METADATA.keywords],
+    authors: [{ name: SITE_CONFIG.author.name, url: SITE_CONFIG.author.github }],
+    creator: SITE_CONFIG.author.name,
+    publisher: SITE_CONFIG.name,
     formatDetection: {
         email: false,
         address: false,
         telephone: false
     },
-    robots: {
-        index: true,
-        follow: true,
-        nocache: false,
-        googleBot: {
-            index: true,
-            follow: true,
-            noimageindex: false,
-            'max-video-preview': -1,
-            'max-image-preview': 'large',
-            'max-snippet': -1
-        }
-    },
+    robots: DEFAULT_METADATA.robots,
     manifest: '/site.webmanifest',
     alternates: {
-        canonical: 'https://xenkit.com'
+        canonical: SITE_CONFIG.url
     },
     openGraph: {
         type: 'website',
         locale: 'en_US',
-        url: 'https://xenkit.com',
-        siteName: 'Xenkit',
-        title: 'Xenkit - Developer Tools for the Web',
+        url: SITE_CONFIG.url,
+        siteName: SITE_CONFIG.name,
+        title: SITE_CONFIG.title,
         description: 'Your ultimate toolkit with all the essential utilities for development, security and productivity in one place.',
         images: [
             {
-                url: '/og-image.png',
+                url: SITE_CONFIG.ogImage,
                 width: 1200,
                 height: 630,
-                alt: 'Xenkit - Developer Tools for the Web'
+                alt: SITE_CONFIG.title
             }
         ]
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Xenkit - Developer Tools for the Web',
+        title: SITE_CONFIG.title,
         description: 'Your ultimate toolkit with all the essential utilities for development, security and productivity in one place.',
-        images: ['/og-image.png'],
-        creator: '@xenvoid404'
+        images: [SITE_CONFIG.ogImage],
+        creator: SITE_CONFIG.author.twitter
     },
     category: 'Technology',
     classification: 'Developer Tools',
     other: {
         'apple-mobile-web-app-capable': 'yes',
         'apple-mobile-web-app-status-bar-style': 'default',
-        'apple-mobile-web-app-title': 'Xenkit',
+        'apple-mobile-web-app-title': SITE_CONFIG.name,
         'google-site-verification': 'your-google-verification-code-here'
     }
 };
