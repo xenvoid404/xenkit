@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { type Variants } from 'framer-motion';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IoClose } from 'react-icons/io5';
-import { FaGithub } from 'react-icons/fa';
 import { navigations } from '@/data/navigations';
 
 export function AppSidebarMobile({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {

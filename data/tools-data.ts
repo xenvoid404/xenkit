@@ -1,5 +1,5 @@
 import { type IconType } from 'react-icons';
-import { FiLock } from 'react-icons/fi';
+import { FiLock, FiKey, FiShield, FiCode, FiFileText, FiHash, FiLink, FiMail, FiImage, FiClock, FiDatabase, FiGlobe } from 'react-icons/fi';
 
 export interface Tool {
     id: string;
@@ -20,13 +20,62 @@ export const tools: Tool[] = [
         icon: FiLock,
         url: '/tools/password-generator',
         keywords: ['password', 'secure', 'random', 'generator', 'security', 'strong password']
+    },
+    {
+        id: 'uuid-generator',
+        name: 'UUID Generator',
+        description: 'Generate unique identifiers (UUIDs) for your applications',
+        categories: ['Generators', 'Utilities'],
+        icon: FiKey,
+        url: '/tools/uuid-generator',
+        keywords: ['uuid', 'guid', 'unique', 'identifier', 'generator', 'random']
+    },
+    {
+        id: 'hash-generator',
+        name: 'Hash Generator',
+        description: 'Generate MD5, SHA-1, SHA-256, and other hash values',
+        categories: ['Generators', 'Security', 'Utilities'],
+        icon: FiHash,
+        url: '/tools/hash-generator',
+        keywords: ['hash', 'md5', 'sha1', 'sha256', 'checksum', 'digest']
+    },
+    {
+        id: 'base64-encoder',
+        name: 'Base64 Encoder/Decoder',
+        description: 'Encode and decode Base64 strings easily',
+        categories: ['Encoders', 'Utilities'],
+        icon: FiCode,
+        url: '/tools/base64-encoder',
+        keywords: ['base64', 'encode', 'decode', 'string', 'conversion']
+    },
+    {
+        id: 'url-encoder',
+        name: 'URL Encoder/Decoder',
+        description: 'Encode and decode URLs for web development',
+        categories: ['Encoders', 'Web Development'],
+        icon: FiLink,
+        url: '/tools/url-encoder',
+        keywords: ['url', 'encode', 'decode', 'percent', 'encoding', 'web']
+    },
+    {
+        id: 'json-formatter',
+        name: 'JSON Formatter',
+        description: 'Format, validate, and minify JSON data',
+        categories: ['Formatters', 'Development'],
+        icon: FiFileText,
+        url: '/tools/json-formatter',
+        keywords: ['json', 'format', 'validate', 'minify', 'pretty', 'parse']
     }
 ];
 
 export const categoryColors: { [key: string]: string } = {
     Generators: 'bg-purple-500/10 text-purple-400 border-purple-500/20 hover:bg-purple-500/20',
     Security: 'bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/20',
-    Utilities: 'bg-pink-500/10 text-pink-400 border-pink-500/20 hover:bg-pink-500/20'
+    Utilities: 'bg-pink-500/10 text-pink-400 border-pink-500/20 hover:bg-pink-500/20',
+    Encoders: 'bg-blue-500/10 text-blue-400 border-blue-500/20 hover:bg-blue-500/20',
+    Formatters: 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500/20',
+    Development: 'bg-orange-500/10 text-orange-400 border-orange-500/20 hover:bg-orange-500/20',
+    'Web Development': 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20 hover:bg-cyan-500/20'
 };
 
 export function shuffleArray<T>(array: T[]): T[] {
