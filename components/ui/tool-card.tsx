@@ -18,21 +18,21 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
     if (viewMode === 'list') {
         return (
             <article
-                className={`group relative overflow-hidden rounded-xl bg-background/50 backdrop-blur-sm border border-muted/20 p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 hover:translate-x-1 hover:scale-[1.01] animate-fade-in-up ${className}`}
+                className={`group relative overflow-hidden rounded-xl bg-background/70 backdrop-blur-sm border border-border/50 p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:bg-background/90 hover:translate-x-1 hover-scale-sm animate-fade-in-up ${className}`}
                 style={style}
             >
                 {/* Background gradient on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/3 to-secondary/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Content */}
                 <div className="relative z-10 flex items-center gap-6">
                     {/* Icon */}
-                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 group-hover:border-primary/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0">
+                    <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-primary/8 border border-primary/15 group-hover:bg-primary/12 group-hover:border-primary/25 group-hover:scale-110 transition-all duration-300 flex-shrink-0">
                         <IconComponent className="w-8 h-8 text-primary transition-colors duration-300" />
                     </div>
 
                     {/* Main content */}
-                    <div className="flex-1 space-y-2">
+                    <div className="flex-1 space-y-3">
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-2">
@@ -40,27 +40,27 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                                         {tool.name}
                                     </h3>
                                 </div>
-                                <p className="text-sm text-muted-foreground leading-relaxed mb-3">{tool.description}</p>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{tool.description}</p>
 
                                 {/* Categories */}
                                 <div className="flex flex-wrap gap-2">
-                                    {tool.categories.slice(0, 4).map(category => (
+                                    {tool.categories.slice(0, 3).map(category => (
                                         <span
                                             key={category}
-                                            className={`text-xs px-2 py-1 rounded-full border transition-all duration-300 cursor-default hover:scale-105 ${
-                                                categoryColors[category] || 'bg-gray-500/10 text-gray-400 border-gray-500/20'
+                                            className={`text-xs px-3 py-1.5 rounded-full border transition-all duration-300 cursor-default hover:scale-105 font-medium ${
+                                                categoryColors[category] || 'bg-muted/50 text-muted-foreground border-border'
                                             }`}
                                             title={`Category: ${category}`}
                                         >
                                             {category}
                                         </span>
                                     ))}
-                                    {tool.categories.length > 4 && (
+                                    {tool.categories.length > 3 && (
                                         <span
-                                            className="text-xs px-2 py-1 rounded-full bg-muted/20 text-muted-foreground border border-muted/30"
-                                            title={`${tool.categories.length - 4} more categories`}
+                                            className="text-xs px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border font-medium"
+                                            title={`${tool.categories.length - 3} more categories`}
                                         >
-                                            {tool.categories.length - 4}
+                                            +{tool.categories.length - 3}
                                         </span>
                                     )}
                                 </div>
@@ -69,7 +69,7 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                             {/* Action button */}
                             <Link href={tool.url}>
                                 <button
-                                    className="group/btn relative overflow-hidden bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-lg px-6 py-3 text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-secondary/20 hover:border-primary/40 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background flex-shrink-0 active:scale-95"
+                                    className="group/btn relative overflow-hidden bg-gradient-to-r from-primary/8 to-secondary/8 border border-primary/15 rounded-lg px-6 py-3 text-sm font-medium transition-all duration-300 hover:from-primary/15 hover:to-secondary/15 hover:border-primary/30 hover:shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background flex-shrink-0 active:scale-95"
                                     aria-label={`Open ${tool.name} tool`}
                                 >
                                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -78,16 +78,11 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                                     </span>
 
                                     {/* Button hover effect */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/15 to-secondary/15 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                                 </button>
                             </Link>
                         </div>
                     </div>
-                </div>
-
-                {/* Subtle border animation on hover */}
-                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm" />
                 </div>
             </article>
         );
@@ -96,17 +91,17 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
     // Grid view (default)
     return (
         <article
-            className={`group relative overflow-hidden rounded-xl bg-background/50 backdrop-blur-sm border border-muted/20 p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 hover:scale-[1.02] animate-fade-in-up ${className}`}
+            className={`group relative overflow-hidden rounded-xl bg-background/70 backdrop-blur-sm border border-border/50 p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 hover-lift hover-scale-sm animate-fade-in-up ${className}`}
             style={style}
         >
             {/* Background gradient on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-secondary/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             {/* Content */}
-            <div className="relative z-10 space-y-4">
+            <div className="relative z-10 space-y-5">
                 {/* Header with icon */}
                 <header className="flex items-start justify-between">
-                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 group-hover:bg-primary/20 group-hover:border-primary/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                    <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-primary/8 border border-primary/15 group-hover:bg-primary/12 group-hover:border-primary/25 group-hover:scale-110 transition-all duration-300">
                         <IconComponent className="w-7 h-7 text-primary transition-colors duration-300" />
                     </div>
                 </header>
@@ -125,8 +120,8 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                     {tool.categories.slice(0, 3).map(category => (
                         <span
                             key={category}
-                            className={`text-xs px-2 py-1 rounded-full border transition-all duration-300 cursor-default hover:scale-105 ${
-                                categoryColors[category] || 'bg-gray-500/10 text-gray-400 border-gray-500/20'
+                            className={`text-xs px-3 py-1.5 rounded-full border transition-all duration-300 cursor-default hover:scale-105 font-medium ${
+                                categoryColors[category] || 'bg-muted/50 text-muted-foreground border-border'
                             }`}
                             title={`Category: ${category}`}
                         >
@@ -135,10 +130,10 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                     ))}
                     {tool.categories.length > 3 && (
                         <span
-                            className="text-xs px-2 py-1 rounded-full bg-muted/20 text-muted-foreground border border-muted/30"
+                            className="text-xs px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border font-medium"
                             title={`${tool.categories.length - 3} more categories`}
                         >
-                            {tool.categories.length - 3}
+                            +{tool.categories.length - 3}
                         </span>
                     )}
                 </div>
@@ -146,7 +141,7 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                 {/* Action button */}
                 <Link href={tool.url} className="block mt-6">
                     <button
-                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 hover:from-primary/20 hover:to-secondary/20 hover:border-primary/40 hover:shadow-lg hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background active:scale-95"
+                        className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-primary/8 to-secondary/8 border border-primary/15 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300 hover:from-primary/15 hover:to-secondary/15 hover:border-primary/30 hover:shadow-md hover-scale-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background active:scale-95"
                         aria-label={`Open ${tool.name} tool`}
                     >
                         <span className="relative z-10 flex items-center justify-center gap-2">
@@ -155,14 +150,9 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
                         </span>
 
                         {/* Button hover effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary/15 to-secondary/15 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                     </button>
                 </Link>
-            </div>
-
-            {/* Subtle border animation on hover */}
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 blur-sm" />
             </div>
         </article>
     );

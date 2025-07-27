@@ -136,30 +136,32 @@ export function PasswordGeneratorClient() {
     const strength = getPasswordStrength(password);
 
     return (
-        <div className="min-h-screen bg-background py-8 px-4">
-            <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-background py-8 px-6">
+            <div className="max-w-5xl mx-auto">
                 {/* Breadcrumb */}
-                <Breadcrumb
-                    items={[
-                        { href: '/', title: 'Home' },
-                        { href: '/tools', title: 'Tools' },
-                        { href: '/tools/password-generator', title: 'Password Generator' }
-                    ]}
-                />
+                <div className="mb-8">
+                    <Breadcrumb
+                        items={[
+                            { href: '/', title: 'Home' },
+                            { href: '/tools', title: 'Tools' },
+                            { href: '/tools/password-generator', title: 'Password Generator' }
+                        ]}
+                    />
+                </div>
 
                 {/* Header */}
                 <div className="text-center mb-12 animate-fade-in-up">
-                    <div className="flex items-center justify-center gap-3 mb-4">
-                        <div className="p-3 bg-primary/10 rounded-xl border border-primary/20">
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                        <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
                             <FiLock className="w-8 h-8 text-primary" />
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-bold">
-                            <span className="text-gradient-glow">Password Generator</span>
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+                            <span className="text-gradient-primary">Password Generator</span>
                         </h1>
                     </div>
-                    <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        Generate secure, random passwords with customizable options. 
-                        All passwords are generated locally - nothing is stored or transmitted.
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
+                        Generate secure, random passwords with customizable options for enhanced security. 
+                        All passwords are generated locally in your browser - nothing is stored or transmitted.
                     </p>
                 </div>
 
@@ -167,16 +169,18 @@ export function PasswordGeneratorClient() {
                 <div className="grid gap-8 lg:grid-cols-3">
                     {/* Password Display & Controls */}
                     <div className="lg:col-span-2">
-                        <div className="bg-background/50 backdrop-blur-sm border border-muted/20 rounded-xl p-6 animate-fade-in-up animation-delay-150">
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-xl font-semibold flex items-center gap-2">
-                                    <FiShield className="w-5 h-5 text-primary" />
+                        <div className="bg-background/70 backdrop-blur-sm border border-border/50 rounded-xl p-6 animate-fade-in-up animation-delay-150">
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-xl font-semibold flex items-center gap-3">
+                                    <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                                        <FiShield className="w-5 h-5 text-primary" />
+                                    </div>
                                     Generated Password
                                 </h2>
                                 <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="p-2 hover:bg-muted/20 rounded-lg transition-colors"
+                                        className="p-2.5 hover:bg-muted/30 rounded-lg transition-all hover:scale-105 active:scale-95 border border-border/30 hover:border-border/50"
                                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                                     >
                                         {showPassword ? <FiEyeOff className="w-4 h-4" /> : <FiEye className="w-4 h-4" />}
@@ -185,8 +189,8 @@ export function PasswordGeneratorClient() {
                             </div>
 
                             {/* Password Display */}
-                            <div className="relative mb-4">
-                                <div className="flex items-center gap-3 p-4 bg-muted/10 rounded-lg border border-muted/30">
+                            <div className="relative mb-6">
+                                <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg border border-border/30">
                                     <code className={`flex-1 text-lg font-mono break-all ${
                                         showPassword ? '' : 'filter blur-sm select-none'
                                     }`}>
@@ -195,7 +199,7 @@ export function PasswordGeneratorClient() {
                                     <div className="flex gap-2">
                                         <button
                                             onClick={generateNewPassword}
-                                            className="p-2 hover:bg-muted/20 rounded-lg transition-all hover:scale-105 active:scale-95"
+                                            className="p-2.5 hover:bg-muted/30 rounded-lg transition-all hover:scale-105 active:scale-95 border border-border/30 hover:border-border/50"
                                             aria-label="Generate new password"
                                         >
                                             <FiRefreshCw className="w-5 h-5" />
@@ -203,7 +207,7 @@ export function PasswordGeneratorClient() {
                                         <button
                                             onClick={copyToClipboard}
                                             disabled={!password || password.includes('Error') || password.includes('Please')}
-                                            className="p-2 hover:bg-muted/20 rounded-lg transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="p-2.5 hover:bg-muted/30 rounded-lg transition-all hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-border/30 hover:border-border/50"
                                             aria-label="Copy password"
                                         >
                                             {copied ? <FiCheck className="w-5 h-5 text-green-500" /> : <FiCopy className="w-5 h-5" />}
@@ -213,16 +217,21 @@ export function PasswordGeneratorClient() {
                             </div>
 
                             {/* Password Strength */}
-                            <div className="mb-6">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-sm font-medium">Password Strength</span>
-                                    <span className={`text-sm font-semibold ${strength.color}`}>
+                            <div className="mb-8">
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="text-sm font-semibold text-foreground">Password Strength</span>
+                                    <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                                        strength.level === 'Strong' ? 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20' :
+                                        strength.level === 'Good' ? 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20' :
+                                        strength.level === 'Fair' ? 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20' : 
+                                        'bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20'
+                                    }`}>
                                         {strength.level}
                                     </span>
                                 </div>
-                                <div className="w-full bg-muted/20 rounded-full h-2">
+                                <div className="w-full bg-muted/20 rounded-full h-3 border border-border/30">
                                     <div 
-                                        className={`h-2 rounded-full transition-all duration-300 ${
+                                        className={`h-full rounded-full transition-all duration-500 ${
                                             strength.level === 'Strong' ? 'bg-green-500' :
                                             strength.level === 'Good' ? 'bg-yellow-500' :
                                             strength.level === 'Fair' ? 'bg-orange-500' : 'bg-red-500'
@@ -236,7 +245,7 @@ export function PasswordGeneratorClient() {
                             <div className="flex flex-wrap gap-3">
                                 <button
                                     onClick={generateNewPassword}
-                                    className="flex items-center gap-2 px-4 py-2 bg-primary text-background rounded-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all font-medium"
+                                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:shadow-lg hover:shadow-primary/25 hover:scale-105 active:scale-95 transition-all font-medium"
                                 >
                                     <FiZap className="w-4 h-4" />
                                     Generate New
@@ -244,7 +253,7 @@ export function PasswordGeneratorClient() {
                                 <button
                                     onClick={copyToClipboard}
                                     disabled={!password || password.includes('Error') || password.includes('Please')}
-                                    className="flex items-center gap-2 px-4 py-2 bg-muted/10 border border-muted/30 rounded-lg hover:bg-muted/20 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="flex items-center gap-2 px-6 py-3 bg-background/70 backdrop-blur-sm border border-border/50 rounded-lg hover:bg-background/90 hover:border-border/70 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                                 >
                                     {copied ? <FiCheck className="w-4 h-4 text-green-500" /> : <FiCopy className="w-4 h-4" />}
                                     {copied ? 'Copied!' : 'Copy'}
@@ -254,9 +263,11 @@ export function PasswordGeneratorClient() {
                     </div>
 
                     {/* Options Panel */}
-                    <div className="bg-background/50 backdrop-blur-sm border border-muted/20 rounded-xl p-6 animate-fade-in-up animation-delay-300">
-                        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                            <FiSettings className="w-5 h-5 text-primary" />
+                    <div className="bg-background/70 backdrop-blur-sm border border-border/50 rounded-xl p-6 animate-fade-in-up animation-delay-300">
+                        <h2 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                            <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                                <FiSettings className="w-5 h-5 text-primary" />
+                            </div>
                             Options
                         </h2>
 
@@ -353,9 +364,9 @@ export function PasswordGeneratorClient() {
 
                 {/* Related Tools */}
                 {relatedTools.length > 0 && (
-                    <div className="mt-16 animate-fade-in-up animation-delay-500">
-                        <h2 className="text-2xl font-bold mb-8 text-center">
-                            <span className="text-gradient-glow">Related Tools</span>
+                    <div className="mt-20 animate-fade-in-up animation-delay-500">
+                        <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center tracking-tight">
+                            <span className="text-gradient-primary">Related Tools</span>
                         </h2>
                         <div className={`grid gap-6 ${
                             isMobile ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6'
@@ -364,7 +375,7 @@ export function PasswordGeneratorClient() {
                                 <div
                                     key={tool.id}
                                     className="animate-fade-in-up"
-                                    style={{ animationDelay: `${600 + (index * 100)}ms` }}
+                                    style={{ animationDelay: `${index * 75}ms` }}
                                 >
                                     <ToolCard tool={tool} className="h-full" />
                                 </div>
