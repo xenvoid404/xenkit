@@ -51,6 +51,7 @@ export function PasswordGeneratorClient() {
 
         if (options.excludeAmbiguous) {
             charset = charset.split('').filter(char => !AMBIGUOUS_CHARS.includes(char)).join('');
+
         }
 
         if (!charset) {
@@ -70,7 +71,7 @@ export function PasswordGeneratorClient() {
     }, [options]);
 
     const copyToClipboard = async () => {
-        if (!password || password === 'Please select at least one character type') return;
+        if (!password || password === 'Please select at least one character type') 
         
         try {
             await navigator.clipboard.writeText(password);

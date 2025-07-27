@@ -91,9 +91,10 @@ const BackgroundEffects = () => (
 );
 
 export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: ToolCardProps) {
-    const baseClasses = 'group relative overflow-hidden rounded-xl bg-background/50 backdrop-blur-sm border border-muted/20 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 will-change-transform';
+     = '', style, viewMode = 'grid' }: ToolCardProps) {
+const baseClasses = 'group relative overflow-hidden rounded-xl bg-background/50 backdrop-blur-sm border border-muted/20 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10 will-change-transform';
     
-    const variants: Variants = {
+    const variants: Variants = 
         initial: { 
             opacity: 0, 
             [viewMode === 'list' ? 'x' : 'y']: viewMode === 'list' ? -20 : 20 
@@ -105,6 +106,7 @@ export function ToolCard({ tool, className = '', style, viewMode = 'grid' }: Too
     };
 
     const transition = { duration: 0.5 };
+
 
     const hoverProps = viewMode === 'list' 
         ? { whileHover: { x: 5, scale: 1.01 }, whileTap: { scale: 0.99 } }

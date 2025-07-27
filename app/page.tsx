@@ -44,7 +44,7 @@ export default function Home() {
         SITE_CONFIG.url,
         SITE_CONFIG.title,
         SITE_CONFIG.description
-    );
+    )
 
     return (
         <>
