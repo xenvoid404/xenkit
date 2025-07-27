@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { FiCopy, FiRefreshCw, FiLock, FiCheck, FiEye, FiEyeOff, FiShield } from 'react-icons/fi';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import { getRelatedTools } from '@/data/tools-data';
-import { ToolCard } from '@/components/ui/tool-card';
+import { ToolCardSimple } from '@/components/ui/tool-card-simple';
 
 interface PasswordOptions {
     length: number;
@@ -82,7 +81,7 @@ export function PasswordGeneratorClient() {
         }
     };
 
-    const getPasswordStrength = () => {
+    const getPasswordStrength = useCallback(() => {
         if (!password || password === 'Please select at least one character type') return 0;
         
         let score = 0;
@@ -94,7 +93,7 @@ export function PasswordGeneratorClient() {
         if (/[^a-zA-Z0-9]/.test(password)) score += 1;
         
         return Math.min(score, 4);
-    };
+    }, [password]);
 
     const getStrengthLabel = (strength: number) => {
         switch (strength) {
@@ -118,11 +117,16 @@ export function PasswordGeneratorClient() {
         }
     };
 
+    // Generate password when component mounts or options change
     useEffect(() => {
         generatePassword();
     }, [generatePassword]);
 
-    const relatedTools = getRelatedTools('password-generator');
+    // Memoize related tools and limit them based on screen size
+    const relatedTools = useMemo(() => {
+        const tools = getRelatedTools('password-generator');
+        return tools.slice(0, 6); // Max 6 tools, will be limited by CSS grid
+    }, []);
 
     const breadcrumbItems = [
         { title: 'Home', href: '/' },
@@ -139,12 +143,7 @@ export function PasswordGeneratorClient() {
                 <Breadcrumb items={breadcrumbItems} />
 
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-8"
-                >
+                <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-primary/10 rounded-lg">
                             <FiLock className="h-6 w-6 text-primary" />
@@ -154,15 +153,10 @@ export function PasswordGeneratorClient() {
                     <p className="text-muted-foreground text-lg leading-relaxed">
                         Generate strong, secure passwords with customizable options. Perfect for creating unique passwords for your accounts and applications.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Main Generator */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="bg-card border border-muted/20 rounded-xl p-6 mb-8"
-                >
+                <div className="bg-card border border-muted/20 rounded-xl p-6 mb-8">
                     {/* Generated Password */}
                     <div className="mb-6">
                         <label className="block text-sm font-medium text-foreground mb-3">Generated Password</label>
@@ -305,15 +299,10 @@ export function PasswordGeneratorClient() {
                             Generate New Password
                         </button>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Security Tips */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="bg-card border border-muted/20 rounded-xl p-6 mb-8"
-                >
+                <div className="bg-card border border-muted/20 rounded-xl p-6 mb-8">
                     <div className="flex items-center gap-3 mb-4">
                         <FiShield className="h-5 w-5 text-primary" />
                         <h2 className="text-xl font-semibold text-foreground">Password Security Tips</h2>
@@ -348,22 +337,27 @@ export function PasswordGeneratorClient() {
                             </li>
                         </ul>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Related Tools */}
                 {relatedTools.length > 0 && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                    >
+                    <div>
                         <h2 className="text-2xl font-bold text-foreground mb-6">Related Tools</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {relatedTools.map((tool) => (
-                                <ToolCard key={tool.id} tool={tool} />
+                        {/* Grid responsive: 1 col mobile, 2 cols sm, 3 cols md+ */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                            {relatedTools.map((tool, index) => (
+                                <div
+                                    key={tool.id}
+                                    className={`
+                                        ${index >= 3 ? 'hidden md:block' : ''} 
+                                        ${index >= 6 ? 'hidden' : ''}
+                                    `}
+                                >
+                                    <ToolCardSimple tool={tool} />
+                                </div>
                             ))}
                         </div>
-                    </motion.div>
+                    </div>
                 )}
             </div>
         </div>
